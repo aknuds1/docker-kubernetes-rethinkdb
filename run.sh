@@ -18,11 +18,14 @@ if [[ -n "${KUBERNETES_SERVICE_HOST}" ]]; then
   [[ "${IP}" == null ]] && IP=""
 fi
 
+mkdir -p /data
+cd /data
+
 if [[ -n "${IP}" ]]; then
   ENDPOINT="${IP}:29015"
   echo "Join to ${ENDPOINT}"
-  exec rethinkdb --bind all --join ${ENDPOINT} -d /var/db/rethinkdb
+  exec rethinkdb --bind all --join ${ENDPOINT}
 else
   echo "Start single instance"
-  exec rethinkdb --bind all -d /var/db/rethinkdb
+  exec rethinkdb --bind all
 fi
