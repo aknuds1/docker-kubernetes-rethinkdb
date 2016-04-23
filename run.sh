@@ -21,8 +21,8 @@ fi
 if [[ -n "${IP}" ]]; then
   ENDPOINT="${IP}:29015"
   echo "Join to ${ENDPOINT}"
-  exec rethinkdb --bind all --join ${ENDPOINT}
+  exec rethinkdb --bind all --join ${ENDPOINT} -d /var/db/rethinkdb
 else
   echo "Start single instance"
-  exec rethinkdb --bind all
+  exec rethinkdb --bind all -d /var/db/rethinkdb
 fi
